@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+     if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+});  
+
+    function showPosition(position) {
+    lat=position.coords.latitude;
+    long=position.coords.longitude;   
+    alert("Latitude: " + lat + 
+    "<br>Longitude: " + long);	
+    
+       
+       var fbURL="http://mytestwebsite.in/android1/index.php? insert=1&mylat="+lat+"&mylong="+long+"&my_user=1";
+       commentdata='hi';
+       $.ajax({
+       url: fbURL+"&callback=?",
+       data: "message="+commentdata,
+       type: 'POST',
+       success: function (resp) {
+       },
+       error: function(e) {
+       }  
+       });
+    }
+ 
+});
+</script>
+</head>
+<body>
+
+<button id="demo">Send</button>
+
+</body>
+</html>
